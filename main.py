@@ -1,9 +1,9 @@
 import os
 
-from menus.action import create
+from actions.crud import create
 from inputs.inputs import timed_input
-from menus.text import START_MENU
-from menus.action import main_menu
+from choices.menus import main_menu
+from choices.text import START_MENU
 
 
 def main():
@@ -16,4 +16,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except StopIteration:
+        ok = False
+        option = timed_input(menu=START_MENU, delay=30)
+        main_menu(opt=option)
