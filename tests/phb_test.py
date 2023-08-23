@@ -4,8 +4,9 @@ import csv
 import os
 import unittest
 
+from actions.actions import row_result
 from actions.crud import create, update, delete
-from utils.csv_data import fields
+from utils.csv_data import fields, fds, updated, company_low, effective_low, val_dict_1
 
 
 class TestCRUD(unittest.TestCase):
@@ -36,14 +37,6 @@ class TestCRUD(unittest.TestCase):
         """Testing adding new record"""
 
         create(p=self.path)
-        fds = [
-            "Paul",
-            "Smith",
-            "Batkovich",
-            "COMPANY",
-            "+1 (123) 456 7890",
-            "+2 (123) 456 7890",
-        ]
         create(data=fds, p=self.path)
         with open(self.path, "rt", encoding="utf-8") as f:
             reader = csv.reader(f)
@@ -58,23 +51,7 @@ class TestCRUD(unittest.TestCase):
         """Testing update record"""
 
         create(p=self.path)
-        fds = [
-            "Paul",
-            "Smith",
-            "Batkovich",
-            "COMPANY",
-            "+1 (123) 456 7890",
-            "+2 (123) 456 7890",
-        ]
         create(data=fds, p=self.path)
-        updated = [
-            "Paul",
-            "Smith",
-            "Batkovich",
-            "EFFECTIVE",
-            "+1 (123) 456 7890",
-            "+2 (123) 456 7890",
-        ]
         update_data = {"0": ("company", "EFFECTIVE")}
         update(update_data=update_data, p=self.path)
         with open(self.path, "rt", encoding="utf-8") as f:
@@ -90,14 +67,6 @@ class TestCRUD(unittest.TestCase):
         """Testing delete record"""
 
         create(p=self.path)
-        fds = [
-            "Paul",
-            "Smith",
-            "Batkovich",
-            "COMPANY",
-            "+1 (123) 456 7890",
-            "+2 (123) 456 7890",
-        ]
         create(data=fds, p=self.path)
         delete(row=0, p=self.path)
         with open(self.path, "rt", encoding="utf-8") as f:
@@ -108,6 +77,25 @@ class TestCRUD(unittest.TestCase):
             except StopIteration:
                 pass
             os.remove(self.path)
+
+
+class TestSearch(unittest.TestCase):
+    path = "../tests/test.csv"
+    test_data = [fds, updated, company_low, effective_low]
+
+    def test_row_search(self):
+        create(p=self.path)
+        for row_data in self.test_data:
+            create(data=row_data, p=self.path)
+        res = row_result(val_dict=val_dict_1, p=self.path)
+        res = list(res.values[0])
+        for field in effective_low:
+            res.remove(field)
+        self.assertEqual(0, len(res))
+        os.remove(self.path)
+
+    def test_column_search(self):
+        pass
 
 
 if __name__ == "__main__":
