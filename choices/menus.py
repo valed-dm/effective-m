@@ -1,64 +1,22 @@
-from actions.actions import search, search_multiple
-from actions.crud import create, read, update
-from choices.text import ADD_MENU, START_MENU, SEARCH_MENU, UPDATE_MENU
+"""Contains app's user interface menus"""
+
+from actions.actions import row_result, column_result
+from actions.crud import create, read, update, delete
+from choices.text import SUB_MENU
+from custom_exc.app_exit import AppExitError
 from inputs.inputs import (
     user_input,
     timed_input,
-    search_input,
-    search_multiple_input,
+    search_single_row,
+    search_multiple_rows,
     update_input,
+    delete_input,
 )
 
 
-def add_row():
-    user_data = user_input()
-    print("Check your input")
-    print(user_data)
-    selection = timed_input(menu=ADD_MENU, delay=60)
-    add_menu(opt=selection, fds=user_data)
-    print("your data successfully saved to phonebook")
-    selection = timed_input(menu=START_MENU, delay=30)
-    main_menu(opt=selection)
-
-
-def search_row():
-    val_dict = search_input()
-    print("Check your search data")
-    for key, val in val_dict.items():
-        print(key, val)
-    selection = timed_input(menu=SEARCH_MENU, delay=60)
-    search_menu(opt=selection, val_dict=val_dict)
-    selection = timed_input(menu=START_MENU, delay=30)
-    main_menu(opt=selection)
-
-
-def search_rows():
-    val_dict = search_multiple_input()
-    print("Check your search data")
-    for key, value in val_dict.items():
-        print(key, ":", value)
-    selection = timed_input(menu=SEARCH_MENU, delay=60)
-    multiple_search_menu(opt=selection, val_dict=val_dict)
-    selection = timed_input(menu=START_MENU, delay=30)
-    main_menu(opt=selection)
-
-
-def update_row():
-    val_dict = search_input()
-    print("Check your search data")
-    for key, val in val_dict.items():
-        print(key, val)
-    selection = timed_input(menu=SEARCH_MENU, delay=60)
-    search_menu(opt=selection, val_dict=val_dict)
-    print("-----enter update data-----")
-    update_data = update_input()
-    selection = timed_input(menu=UPDATE_MENU, delay=60)
-    update_menu(opt=selection, update_data=update_data)
-    selection = timed_input(menu=START_MENU, delay=30)
-    main_menu(opt=selection)
-
-
 def main_menu(opt):
+    """Main menu"""
+
     if opt == "1":
         read()
     elif opt == "2":
@@ -66,44 +24,88 @@ def main_menu(opt):
     elif opt == "3":
         update_row()
     elif opt == "4":
-        search_row()
+        delete_row()
     elif opt == "5":
-        search_rows()
-    elif opt == "6":
-        quit()
-
-
-def add_menu(opt, fds):
-    if opt == "1":
-        create(fds=fds, mode="a")
-    elif opt == "2":
-        add_row()
-    elif opt == "3":
-        quit()
-
-
-def search_menu(opt, val_dict):
-    if opt == "1":
-        search(val_dict)
-    elif opt == "2":
         search_row()
-    elif opt == "3":
-        quit()
+    elif opt == "6":
+        search_column()
+    elif opt == "7":
+        raise AppExitError
 
 
-def multiple_search_menu(opt, val_dict):
+def sub_menu(handler, navigator, delay, data=None):
+    """Subsequent menu"""
+
+    opt = timed_input(menu=SUB_MENU, delay=delay)
+    exec_menu(opt, data, handler, navigator)
+
+
+def exec_menu(opt, data, handler, navigator):
+    """Executes app menus"""
+
     if opt == "1":
-        search_multiple(val_dict)
+        handler(data)
     elif opt == "2":
-        search_rows()
+        navigator()
     elif opt == "3":
-        quit()
+        raise StopIteration
+    elif opt == "4":
+        raise AppExitError
 
 
-def update_menu(opt, update_data):
-    if opt == "1":
-        update(update_data)
-    elif opt == "2":
-        update_row()
-    elif opt == "3":
-        quit()
+def add_row():
+    """Guides user through add row task"""
+
+    user_data = user_input()
+    print("Check your input")
+    print(user_data)
+    sub_menu(handler=create, navigator=add_row, delay=60, data=user_data)
+    print("your data successfully saved to phonebook")
+    raise StopIteration
+
+
+def update_row():
+    """Guides user through update row task"""
+
+    # user is to define needed row number
+    print("===find row number to update=============")
+    val_dict = search_single_row()
+    print("Check your search data")
+    for key, val in val_dict.items():
+        print(key, val)
+    sub_menu(handler=row_result, navigator=search_row, delay=60, data=val_dict)
+    # user is to enter row number, column name, new column value
+    print("===enter update data=====================")
+    update_data = update_input()
+    sub_menu(handler=update, navigator=update_row, delay=60, data=update_data)
+    raise StopIteration
+
+
+def delete_row():
+    """Guides user through delete row task"""
+
+    print("Enter row to delete")
+    row = delete_input()
+    sub_menu(handler=delete, navigator=delete_row, delay=60, data=row)
+    raise StopIteration
+
+
+def search_row():
+    """Guides user through find single row task"""
+
+    val_dict = search_single_row()
+    print("Check your search data")
+    for key, val in val_dict.items():
+        print(key, val)
+    sub_menu(handler=row_result, navigator=search_row, delay=60, data=val_dict)
+    raise StopIteration
+
+
+def search_column():
+    """Guides user through find multiple rows task"""
+
+    val_dict = search_multiple_rows()
+    print("Check your search data")
+    print(val_dict)
+    sub_menu(handler=column_result, navigator=search_column, delay=60, data=val_dict)
+    raise StopIteration
