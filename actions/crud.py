@@ -4,8 +4,8 @@ import csv
 
 import pandas as pd
 
-from .actions import sort, get_df
 from utils.csv_data import path, fields
+from .actions import sort, get_df
 
 
 def create(data=fields, p=path):
