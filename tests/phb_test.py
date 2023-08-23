@@ -1,3 +1,5 @@
+"""Tests for .csv phone book app"""
+
 import csv
 import os
 import unittest
@@ -6,17 +8,23 @@ from actions.crud import create, update, delete
 from utils.csv_data import fields
 
 
-class TestPhoneBook(unittest.TestCase):
+class TestCRUD(unittest.TestCase):
+    """.csv CRUD testing case"""
+
     path = "../tests/test.csv"
 
     def test_csv(self):
+        """Testing create .csv func"""
+
         create(p=self.path)
         self.assertEqual(True, os.path.exists(self.path))
         os.remove(self.path)
 
     def test_csv_headers(self):
+        """Testing .csv headers schema"""
+
         create(p=self.path)
-        with open(self.path, "rt") as f:
+        with open(self.path, "rt", encoding="utf-8") as f:
             reader = csv.reader(f)
             headers = next(reader)
             for field in fields:
@@ -25,6 +33,8 @@ class TestPhoneBook(unittest.TestCase):
             os.remove(self.path)
 
     def test_csv_create(self):
+        """Testing adding new record"""
+
         create(p=self.path)
         fds = [
             "Paul",
@@ -35,7 +45,7 @@ class TestPhoneBook(unittest.TestCase):
             "+2 (123) 456 7890",
         ]
         create(data=fds, p=self.path)
-        with open(self.path, "rt") as f:
+        with open(self.path, "rt", encoding="utf-8") as f:
             reader = csv.reader(f)
             _ = next(reader)
             new_record = next(reader)
@@ -45,6 +55,8 @@ class TestPhoneBook(unittest.TestCase):
             os.remove(self.path)
 
     def test_csv_update(self):
+        """Testing update record"""
+
         create(p=self.path)
         fds = [
             "Paul",
@@ -65,7 +77,7 @@ class TestPhoneBook(unittest.TestCase):
         ]
         update_data = {"0": ("company", "EFFECTIVE")}
         update(update_data=update_data, p=self.path)
-        with open(self.path, "rt") as f:
+        with open(self.path, "rt", encoding="utf-8") as f:
             reader = csv.reader(f)
             _ = next(reader)
             updated_record = next(reader)
@@ -75,6 +87,8 @@ class TestPhoneBook(unittest.TestCase):
             os.remove(self.path)
 
     def test_csv_delete(self):
+        """Testing delete record"""
+
         create(p=self.path)
         fds = [
             "Paul",
@@ -86,7 +100,7 @@ class TestPhoneBook(unittest.TestCase):
         ]
         create(data=fds, p=self.path)
         delete(row=0, p=self.path)
-        with open(self.path, "rt") as f:
+        with open(self.path, "rt", encoding="utf-8") as f:
             reader = csv.reader(f)
             _ = next(reader)
             try:
