@@ -4,8 +4,8 @@ import csv
 import os
 import unittest
 
-from actions.actions import row_result, column_result
-from actions.crud import create, update, delete
+from actions import row_result, column_result
+from actions import create, update, delete
 from utils.csv_data import (
     fields,
     fds,
@@ -20,7 +20,7 @@ from utils.csv_data import (
 class TestCRUD(unittest.TestCase):
     """.csv CRUD testing case"""
 
-    path = "../tests/test.csv"
+    path = "tests/test.csv"
 
     def test_csv(self):
         """Testing create .csv func"""
@@ -88,7 +88,7 @@ class TestCRUD(unittest.TestCase):
 
 
 class TestSearch(unittest.TestCase):
-    path = "../tests/test.csv"
+    path = "tests/test.csv"
     test_data = [fds, updated, company_low, effective_low]
 
     def test_row_search(self):
