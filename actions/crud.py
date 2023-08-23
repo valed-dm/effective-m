@@ -5,12 +5,13 @@ import csv
 import pandas as pd
 
 from .actions import sort, get_df
+from utils.csv_data import path, fields
 
 
-def create(data):
+def create(data=fields, p=path):
     """Creates row in .csv file with CSV File API usage"""
 
-    with open("phone_book.csv", mode="a", newline="", encoding="utf-8") as f:
+    with open(p, mode="a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         # data - fields array [field_1, field_2, ...]
         writer.writerow(data)
@@ -20,7 +21,7 @@ def read():
     """Reads .csv by pages. Page size = chunksize."""
 
     sort()
-    csv_data = pd.read_csv("phone_book.csv", chunksize=50, iterator=True)
+    csv_data = pd.read_csv(path, chunksize=50, iterator=True)
     while True:
         inp = input("for next page press enter; to quit type stop:_")
         if inp == "stop":
@@ -39,7 +40,7 @@ def update(update_data):
     df.loc[int(str_row), [column]] = [new_value]
     print("update success!")
     print(f"column name: {column} row: {str_row} new data: {new_value}")
-    df.to_csv("phone_book.csv", index=False)
+    df.to_csv(path, index=False)
 
 
 def delete(row):
@@ -48,4 +49,4 @@ def delete(row):
     df = get_df()
     df.drop([int(row)], inplace=True)
     print(f"row {row} successfully deleted!")
-    df.to_csv("phone_book.csv", index=False)
+    df.to_csv(path, index=False)

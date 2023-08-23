@@ -2,11 +2,13 @@
 
 import pandas as pd
 
+from utils.csv_data import path
+
 
 def get_df():
     """Creates dataframe from .csv"""
 
-    data = pd.read_csv("phone_book.csv")
+    data = pd.read_csv(path)
     df = pd.DataFrame(data)
     return df
 
@@ -14,9 +16,9 @@ def get_df():
 def sort():
     """Sorts and save sorted data to .csv"""
 
-    df = pd.read_csv("phone_book.csv")
+    df = pd.read_csv(path)
     sorted_df = df.sort_values(by=["fname"])
-    sorted_df.to_csv("phone_book.csv", index=False)
+    sorted_df.to_csv(path, index=False)
 
 
 def row_result(val_dict):
