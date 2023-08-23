@@ -21,13 +21,13 @@ def sort():
     sorted_df.to_csv(path, index=False)
 
 
-def row_result(val_dict):
+def row_result(val_dict, p=path):
     """Executes single row search with multiple columns data this row contains"""
 
-    df = get_df()
+    df = get_df(p)
     masks = []
     for key, value in val_dict.items():
-        mask = df[key] == value[0]
+        mask = df[key] == value
         masks.append(mask)
     aggregate_mask = masks[0]
     for mask in masks[1:]:
@@ -38,10 +38,10 @@ def row_result(val_dict):
     return res
 
 
-def column_result(val_dict):
+def column_result(val_dict, p=path):
     """Executes multiple row search with one or many column's values"""
 
-    df = get_df()
+    df = get_df(p)
     key = list(val_dict)[0]
     # .isin() considers multiple column values rows contain
     mask = df[key].isin(val_dict[key])

@@ -70,7 +70,7 @@ def search_single_row():
         if column == "stop":
             break
         value = input_charfield("value")
-        search_data[column] = (value,)
+        search_data[column] = value
     return search_data
 
 
