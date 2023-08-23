@@ -39,3 +39,4 @@ val_dict_1 = {
     "mname": "Batk",
     "company": "effective",
 }
+val_dict_2 = {"company": ("COMPANY", "company")}

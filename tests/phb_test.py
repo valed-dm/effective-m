@@ -4,9 +4,17 @@ import csv
 import os
 import unittest
 
-from actions.actions import row_result
+from actions.actions import row_result, column_result
 from actions.crud import create, update, delete
-from utils.csv_data import fields, fds, updated, company_low, effective_low, val_dict_1
+from utils.csv_data import (
+    fields,
+    fds,
+    updated,
+    company_low,
+    effective_low,
+    val_dict_1,
+    val_dict_2,
+)
 
 
 class TestCRUD(unittest.TestCase):
@@ -88,6 +96,7 @@ class TestSearch(unittest.TestCase):
         for row_data in self.test_data:
             create(data=row_data, p=self.path)
         res = row_result(val_dict=val_dict_1, p=self.path)
+        self.assertEqual(1, len(res))
         res = list(res.values[0])
         for field in effective_low:
             res.remove(field)
@@ -95,7 +104,20 @@ class TestSearch(unittest.TestCase):
         os.remove(self.path)
 
     def test_column_search(self):
-        pass
+        create(p=self.path)
+        for row_data in self.test_data:
+            create(data=row_data, p=self.path)
+        res = column_result(val_dict=val_dict_2, p=self.path)
+        self.assertEqual(2, len(res))
+        res_1 = list(res.values[0])
+        res_2 = list(res.values[1])
+        for field in fds:
+            res_1.remove(field)
+        for field in company_low:
+            res_2.remove(field)
+        self.assertEqual(0, len(res_1))
+        self.assertEqual(0, len(res_2))
+        os.remove(self.path)
 
 
 if __name__ == "__main__":
