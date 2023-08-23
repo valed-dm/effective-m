@@ -8,20 +8,20 @@ from choices.menus import main_menu
 from choices.text import START_MENU
 from custom_exc.app_exit import AppExitError
 from inputs.inputs import timed_input
+from utils.csv_data import path
 
 
 def main():
-    """Launches main menu. Creates phone_book.csv as db storage if not exists."""
+    """Launches main menu"""
 
-    if not os.path.exists("phone_book.csv"):
-        os.system("touch phone_book.csv")
-        fields = ["fname", "lname", "mname", "company", "bphone", "cphone"]
-        create(fields)
     opt = timed_input(menu=START_MENU, delay=30)
     main_menu(opt)
 
 
 if __name__ == "__main__":
+    if not os.path.exists(path):
+        create()
+
     # automatically restarts app and processes exceptions
     while True:
         try:
