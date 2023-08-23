@@ -5,10 +5,10 @@ import pandas as pd
 from utils.csv_data import path
 
 
-def get_df():
+def get_df(p=path):
     """Creates dataframe from .csv"""
 
-    data = pd.read_csv(path)
+    data = pd.read_csv(p)
     df = pd.DataFrame(data)
     return df
 
