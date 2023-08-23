@@ -30,23 +30,23 @@ def read():
         print(df.to_markdown())
 
 
-def update(update_data):
+def update(update_data, p=path):
     """Updates row column data stored in .csv"""
 
-    df = get_df()
+    df = get_df(p)
     str_row = list(update_data)[0]
     column = update_data[str_row][0]
     new_value = update_data[str_row][1]
     df.loc[int(str_row), [column]] = [new_value]
     print("update success!")
     print(f"column name: {column} row: {str_row} new data: {new_value}")
-    df.to_csv(path, index=False)
+    df.to_csv(p, index=False)
 
 
-def delete(row):
+def delete(row, p=path):
     """Deletes row from .csv using row number"""
 
-    df = get_df()
+    df = get_df(p)
     df.drop([int(row)], inplace=True)
     print(f"row {row} successfully deleted!")
-    df.to_csv(path, index=False)
+    df.to_csv(p, index=False)
