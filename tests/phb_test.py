@@ -88,10 +88,14 @@ class TestCRUD(unittest.TestCase):
 
 
 class TestSearch(unittest.TestCase):
+    """Search data testing case"""
+
     path = "tests/test.csv"
     test_data = [fds, updated, company_low, effective_low]
 
     def test_row_search(self):
+        """Testing single row with multiple columns data match"""
+
         create(p=self.path)
         for row_data in self.test_data:
             create(data=row_data, p=self.path)
@@ -104,6 +108,8 @@ class TestSearch(unittest.TestCase):
         os.remove(self.path)
 
     def test_column_search(self):
+        """Testing single column with multiple rows data match"""
+
         create(p=self.path)
         for row_data in self.test_data:
             create(data=row_data, p=self.path)
