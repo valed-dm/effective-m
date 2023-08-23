@@ -1,31 +1,20 @@
+"""Contains menus text views"""
+
 START_MENU = """
-    WELCOME TO PHONEBOOK!
-    Choose action from following:
-    1 - browse phonebook
-    2 - add new contact
-    3 - update record
-    4 - search by single param
-    5 - search by multiple params
-    6 - quit
-    """
-
-ADD_MENU = """
-Choose action from following:
-1 - confirm data and save
-2 - repeat entry
-3 - quit without save
+WELCOME TO PHONEBOOK MAIN MENU!
+1 - browse
+2 - add
+3 - update
+4 - delete
+5 - search row
+6 - search column
+7 - quit
 """
 
-SEARCH_MENU = """
-Choose action from following:
-1 - start search
+SUB_MENU = """
+SUB MENU
+1 - execute
 2 - repeat entry
-3 - quit
-"""
-
-UPDATE_MENU = """
-Choose action from following:
-1 - do update
-2 - repeat entry
-3 - quit
+3 - MAIN MENU
+4 - quit
 """
