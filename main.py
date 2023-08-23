@@ -4,10 +4,10 @@ import os
 import sys
 
 from actions.crud import create
-from inputs.inputs import timed_input
 from choices.menus import main_menu
 from choices.text import START_MENU
 from custom_exc.app_exit import AppExitError
+from inputs.inputs import timed_input
 
 
 def main():
