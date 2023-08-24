@@ -1,0 +1,10 @@
+[MASTER]
+disable=
+     C0103, # Variable name "df" doesn't conform to snake_case naming style (invalid-name)
+     W0102, # Dangerous default value fields (builtins.list) as argument (dangerous-default-value)
+     W0612, # Unused variable 'b' (unused-variable)
+
+[BASIC]
+
+[FORMAT]
+max-line-length=130
