@@ -15,7 +15,7 @@ def timed_input(menu, delay):
     if a:
         return sys.stdin.readline().strip()
     print("Your time expired. Make another attempt.")
-    return sys.exit(0)
+    sys.exit(0)
 
 
 def user_input():
