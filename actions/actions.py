@@ -2,7 +2,7 @@
 from typing import Dict, Tuple
 
 import pandas as pd
-from pandas import DataFrame, Series
+from pandas import DataFrame
 
 from utils.csv_data import path
 
