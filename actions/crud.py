@@ -20,8 +20,10 @@ def create(data: list[str] = fields, p: str = path) -> None:
         writer.writerow(data)
 
 
-def read():
-    """Reads .csv by pages. Page size = chunksize."""
+def read() -> None:
+    """Reads .csv by pages.
+    Page size (rows qty per page shown) = chunksize.
+    """
 
     sort()
     csv_data = pd.read_csv(path, chunksize=50, iterator=True)
