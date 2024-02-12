@@ -25,20 +25,19 @@ def main_menu(opt: str) -> Callable[[], None] | AppExitError:
         AppExitError: Custom exception is raised to quit app
     """
 
-    if opt == "1":
-        return read()
-    elif opt == "2":
-        return add_row()
-    elif opt == "3":
-        return update_row()
-    elif opt == "4":
-        return delete_row()
-    elif opt == "5":
-        return search_row()
-    elif opt == "6":
-        return search_column()
-    elif opt == "7":
+    options = {
+        "1": read,
+        "2": add_row,
+        "3": update_row,
+        "4": delete_row,
+        "5": search_row,
+        "6": search_column,
+    }
+
+    if opt == "7":
         raise AppExitError
+    else:
+        return options[opt]()
 
 
 def sub_menu(handler, navigator, delay, data=None):
