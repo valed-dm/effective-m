@@ -8,12 +8,15 @@ from utils.csv_data import path, fields
 from .actions import sort, get_df
 
 
-def create(data=fields, p=path):
-    """Creates row in .csv file with CSV File API usage"""
+def create(data: list[str] = fields, p: str = path) -> None:
+    """Creates row in .csv file with CSV File API usage
+    Args:
+        data: list of phonebook fields values to be stored in a .csv file row
+        p: path to .csv file
+    """
 
     with open(p, mode="a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        # data - fields array [field_1, field_2, ...]
         writer.writerow(data)
 
 
