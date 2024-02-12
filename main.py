@@ -11,8 +11,17 @@ from inputs.inputs import timed_input
 from utils.csv_data import path
 
 
-def main():
-    """Launches main menu"""
+def main() -> None:
+    """Launches main menu
+    WELCOME TO PHONEBOOK MAIN MENU!
+    1 - browse
+    2 - add
+    3 - update
+    4 - delete
+    5 - search row
+    6 - search column
+    7 - quit
+    """
 
     opt = timed_input(menu=START_MENU, delay=30)
     main_menu(opt)
