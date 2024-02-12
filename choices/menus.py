@@ -1,4 +1,5 @@
 """Contains app's user interface menus"""
+from typing import Callable
 
 from actions.actions import row_result, column_result
 from actions.crud import create, read, update, delete
@@ -14,21 +15,28 @@ from inputs.inputs import (
 )
 
 
-def main_menu(opt):
-    """Main menu"""
+def main_menu(opt: str) -> Callable[[], None] | AppExitError:
+    """Main menu
+    Args:
+        opt: User choice string value
+    Returns:
+        CRUD or SEARCH functions depending on user choice
+    Raises:
+        AppExitError: Custom exception is raised to quit app
+    """
 
     if opt == "1":
-        read()
+        return read()
     elif opt == "2":
-        add_row()
+        return add_row()
     elif opt == "3":
-        update_row()
+        return update_row()
     elif opt == "4":
-        delete_row()
+        return delete_row()
     elif opt == "5":
-        search_row()
+        return search_row()
     elif opt == "6":
-        search_column()
+        return search_column()
     elif opt == "7":
         raise AppExitError
 
