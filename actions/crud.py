@@ -37,7 +37,11 @@ def read() -> None:
 
 
 def update(update_data: Dict[str, Tuple[str, str]], p: str = path) -> None:
-    """Updates row-column field data value stored in .csv"""
+    """Updates row-column field data value stored in .csv
+    Args:
+        update_data: {row_number: (column_name, new_value)}
+        p: path to .csv file
+    """
 
     # extracts row number list(dict) -> list[dict_key_1][0]
     row_number: str = list(update_data)[0]
