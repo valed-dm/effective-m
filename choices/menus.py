@@ -36,8 +36,8 @@ def main_menu(opt: str) -> Callable[[], None] | AppExitError:
 
     if opt == "7":
         raise AppExitError
-    else:
-        return options[opt]()
+
+    return options[opt]()
 
 
 def sub_menu(handler, navigator, delay, data=None):
