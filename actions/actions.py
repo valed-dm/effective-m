@@ -13,7 +13,7 @@ def get_df(p=path):
     return df
 
 
-def sort():
+def sort() -> None:
     """Sorts and save sorted data to .csv"""
 
     df = pd.read_csv(path)
