@@ -1,6 +1,7 @@
 """CRUD for .csv as database"""
 
 import csv
+from typing import Dict, Tuple
 
 import pandas as pd
 
@@ -35,16 +36,25 @@ def read() -> None:
         print(df.to_markdown())
 
 
-def update(update_data, p=path):
-    """Updates row column data stored in .csv"""
+def update(update_data: Dict[str, Tuple[str, str]], p: str = path) -> None:
+    """Updates row-column field data value stored in .csv"""
+
+    # extracts row number list(dict) -> list[dict_key_1][0]
+    row_number: str = list(update_data)[0]
+    # update data tuple ('column', 'value')
+    ud: tuple = update_data[row_number]
+    # reads column name
+    column: str = ud[0]
+    # reads new field value
+    new_value: str = ud[1]
 
     df = get_df(p)
-    str_row = list(update_data)[0]
-    column = update_data[str_row][0]
-    new_value = update_data[str_row][1]
-    df.loc[int(str_row), [column]] = [new_value]
+    df.loc[int(row_number), [column]] = [new_value]
+
     print("update success!")
-    print(f"column name: {column} row: {str_row} new data: {new_value}")
+    print(f"column name: {column} row: {row_number} new data: {new_value}")
+
+    # saves data to .csv
     df.to_csv(p, index=False)
 
 
