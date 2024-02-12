@@ -1,12 +1,16 @@
 """Gets, sorts, requests .csv file as database"""
 
 import pandas as pd
+from pandas import DataFrame
 
 from utils.csv_data import path
 
 
-def get_df(p=path):
-    """Creates dataframe from .csv"""
+def get_df(p: str = path) -> DataFrame:
+    """Creates dataframe from .csv
+    Args:
+        p: path to .csv file
+    """
 
     data = pd.read_csv(p)
     df = pd.DataFrame(data)
