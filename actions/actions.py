@@ -1,7 +1,8 @@
 """Gets, sorts, requests .csv file as database"""
+from typing import Dict
 
 import pandas as pd
-from pandas import DataFrame
+from pandas import DataFrame, Series
 
 from utils.csv_data import path
 
@@ -25,8 +26,12 @@ def sort() -> None:
     sorted_df.to_csv(path, index=False)
 
 
-def row_result(val_dict, p=path):
-    """Executes single row search with multiple columns data this row contains"""
+def row_result(val_dict: Dict[str, str], p: str = path) -> DataFrame | None:
+    """Executes single row search with multiple columns values
+    Args:
+        val_dict: {column_1: value_1, column_2: value_2, ...}
+        p: path to .csv file
+    """
 
     df = get_df(p)
     masks = []
@@ -42,7 +47,7 @@ def row_result(val_dict, p=path):
     return res
 
 
-def column_result(val_dict, p=path):
+def column_result(val_dict: Dict[str, str], p: str = path):
     """Executes multiple row search with one or many column's values"""
 
     df = get_df(p)
