@@ -62,10 +62,16 @@ def update(update_data: Dict[str, Tuple[str, str]], p: str = path) -> None:
     df.to_csv(p, index=False)
 
 
-def delete(row, p=path):
-    """Deletes row from .csv using row number"""
+def delete(row: str, p: str = path) -> None:
+    """Deletes row from .csv using row number
+    Args:
+        row: row number to be deleted
+        p: path to .csv file
+    """
 
     df = get_df(p)
     df.drop([int(row)], inplace=True)
+
     print(f"row {row} successfully deleted!")
+
     df.to_csv(p, index=False)
