@@ -20,7 +20,7 @@ from utils.csv_data import (
 class TestCRUD(unittest.TestCase):
     """.csv CRUD testing case"""
 
-    path = "tests/test.csv"
+    path = "test.csv"
 
     def test_csv(self):
         """Testing create .csv func"""
