@@ -33,6 +33,7 @@ if __name__ == "__main__":
             print("Request returns no data. Try other search.")
         except AppExitError:
             # executes sys.exit for all menus exit point
+            print("phbook operation is terminated by user")
             sys.exit(0)
         else:
             break
