@@ -6,8 +6,8 @@ import sys
 from .input import input_charfield, input_phonefield
 
 
-def timed_input(menu: str, delay: int) -> str | None:
-    """Defines menu showtime duration
+def timed_menu(menu: str, delay: int) -> str | None:
+    """Displays menu string for given showtime duration
     Args:
         menu: Menu string
         delay: Menu showtime in seconds
