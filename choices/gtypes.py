@@ -1,3 +1,5 @@
+"""Generic types used in functions annotations"""
+
 from typing import Callable, Dict, List, Tuple, Union
 
 from pandas import DataFrame
