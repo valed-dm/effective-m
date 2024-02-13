@@ -1,5 +1,7 @@
 """Contains app's user interface menus"""
-from typing import Callable
+from typing import Callable, Dict, Tuple, Union, List
+
+from pandas import DataFrame
 
 from actions.actions import row_result, column_result
 from actions.crud import create, read, update, delete
@@ -40,20 +42,48 @@ def main_menu(opt: str) -> Callable[[], None] | AppExitError:
     return options[opt]()
 
 
-def sub_menu(handler, navigator, delay, data=None):
-    """Subsequent menu"""
+def sub_menu(
+        handler: Union[
+            Callable[[List[str], str], None],  # create
+            Callable[[Dict[str, Tuple[str, str]], str], None],  # update
+            Callable[[str, str], None],  # delete
+            Callable[[Dict[str, str], str], DataFrame],  # row_result
+            Callable[[Dict[str, Tuple[str]], str], DataFrame],  # column_result
+        ],
+        repeater: Callable[[], None],
+        delay: int,
+        data: Union[
+            None,
+            str,
+            Tuple[str],
+            Dict[str, str],
+            Dict[str, tuple[str, str]],
+        ] = None
+) -> None:
+    """Subsequent menu
+    Args:
+        handler: CRUD or SEARCH functions depending on user choice
+        repeater: Repeats chosen entry operation anew to correct inputted data
+        delay: Menu showtime in seconds
+        data:
+            None
+            row: str - row_number to be deleted
+            user_data: Tuple[str] - (str, str, str, str, str, str) new row data to insert
+            val_dict: Dict[str, str]  - {column_1: value_1, column_2: value_2 ...} single row search by multiple values
+            update_data: Dict[str, tuple[str, str]]  - {row_number: (column, value)} to update the selected field value
+    """
 
     opt = timed_input(menu=SUB_MENU, delay=delay)
-    exec_menu(opt, data, handler, navigator)
+    exec_menu(opt, data, handler, repeater)
 
 
-def exec_menu(opt, data, handler, navigator):
+def exec_menu(opt, data, handler, repeater):
     """Executes app menus"""
 
     if opt == "1":
         handler(data)
     elif opt == "2":
-        navigator()
+        repeater()
     elif opt == "3":
         raise StopIteration
     elif opt == "4":
@@ -66,7 +96,7 @@ def add_row():
     user_data = user_input()
     print("Check your input")
     print(user_data)
-    sub_menu(handler=create, navigator=add_row, delay=60, data=user_data)
+    sub_menu(handler=create, repeater=add_row, delay=60, data=user_data)
     print("your data successfully saved to phonebook")
     raise StopIteration
 
@@ -80,11 +110,11 @@ def update_row():
     print("Check your search data")
     for key, val in val_dict.items():
         print(key, val)
-    sub_menu(handler=row_result, navigator=search_row, delay=60, data=val_dict)
+    sub_menu(handler=row_result, repeater=search_row, delay=60, data=val_dict)
     # user is to enter row number, column name, new column value
     print("===enter update data=====================")
     update_data = update_input()
-    sub_menu(handler=update, navigator=update_row, delay=60, data=update_data)
+    sub_menu(handler=update, repeater=update_row, delay=60, data=update_data)
     raise StopIteration
 
 
@@ -93,7 +123,7 @@ def delete_row():
 
     print("Enter row to delete")
     row = delete_input()
-    sub_menu(handler=delete, navigator=delete_row, delay=60, data=row)
+    sub_menu(handler=delete, repeater=delete_row, delay=60, data=row)
     raise StopIteration
 
 
@@ -104,7 +134,7 @@ def search_row():
     print("Check your search data")
     for key, val in val_dict.items():
         print(key, val)
-    sub_menu(handler=row_result, navigator=search_row, delay=60, data=val_dict)
+    sub_menu(handler=row_result, repeater=search_row, delay=60, data=val_dict)
     raise StopIteration
 
 
@@ -114,5 +144,5 @@ def search_column():
     val_dict = search_multiple_rows()
     print("Check your search data")
     print(val_dict)
-    sub_menu(handler=column_result, navigator=search_column, delay=60, data=val_dict)
+    sub_menu(handler=column_result, repeater=search_column, delay=60, data=val_dict)
     raise StopIteration
