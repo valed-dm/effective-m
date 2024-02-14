@@ -4,31 +4,19 @@ import os
 import sys
 
 from actions.crud import create
-from choices.menus import main_menu_agent
-from choices.text import START_MENU
-from custom_exc.app_exit import AppExitError
-from inputs.inputs import timed_menu
-from utils.csv_data import path
+from menus.main_menu import main_menu
+from exit_exception.app_exit import AppExitError
+from csv_dir.csv_data import path
 
 
 def main() -> None:
-    """Launches main menu
-    WELCOME TO PHONEBOOK MAIN MENU!
-    1 - browse
-    2 - add
-    3 - update
-    4 - delete
-    5 - search row
-    6 - search column
-    7 - quit
-    """
+    """Launches main menu"""
 
-    opt = timed_menu(menu=START_MENU, delay=30)
-    main_menu_agent(opt)
+    main_menu()
 
 
 if __name__ == "__main__":
-    # creates .csv storage when not found on utils.csv_data path
+    # creates .csv_dir storage when not found on utils.csv_data path
     if not os.path.exists(path):
         create()
 
