@@ -1,4 +1,4 @@
-"""Tests for .csv phone book app"""
+"""Tests for .csv_dir phone book app"""
 
 import csv
 import os
@@ -6,7 +6,7 @@ import unittest
 
 from actions import row_result, column_result
 from actions import create, update, delete
-from utils.csv_data import (
+from csv_dir.csv_data import (
     fields,
     fds,
     updated,
@@ -18,19 +18,19 @@ from utils.csv_data import (
 
 
 class TestCRUD(unittest.TestCase):
-    """.csv CRUD testing case"""
+    """.csv_dir CRUD testing case"""
 
-    path = "test.csv"
+    path = "test.csv_dir"
 
     def test_csv(self):
-        """Testing create .csv func"""
+        """Testing create .csv_dir func"""
 
         create(p=self.path)
         self.assertEqual(True, os.path.exists(self.path))
         os.remove(self.path)
 
     def test_csv_headers(self):
-        """Testing .csv headers schema"""
+        """Testing .csv_dir headers schema"""
 
         create(p=self.path)
         with open(self.path, "rt", encoding="utf-8") as f:
@@ -90,7 +90,7 @@ class TestCRUD(unittest.TestCase):
 class TestSearch(unittest.TestCase):
     """Search data testing case"""
 
-    path = "tests/test.csv"
+    path = "tests/test.csv_dir"
     test_data = [fds, updated, company_low, effective_low]
 
     def test_row_search(self):
