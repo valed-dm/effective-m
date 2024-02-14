@@ -3,9 +3,9 @@
 from typing import Dict, Tuple
 
 import pandas as pd
+from pandas import DataFrame
 from csv_dir.csv_data import path
 from inputs.check_input import input_charfield
-from pandas import DataFrame
 
 
 def get_df(p: str = path) -> DataFrame:
