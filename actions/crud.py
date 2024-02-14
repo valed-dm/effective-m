@@ -4,9 +4,9 @@ import csv
 from typing import Dict, Tuple
 
 import pandas as pd
+from csv_dir.csv_data import fields, path
 
-from utils.csv_data import path, fields
-from .actions import sort, get_df
+from .actions import get_df, sort
 
 
 def create(data: list[str] = fields, p: str = path) -> None:
@@ -19,6 +19,7 @@ def create(data: list[str] = fields, p: str = path) -> None:
     with open(p, mode="a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(data)
+        print(f"{data} added to phonebook successfully")
 
 
 def read() -> None:
