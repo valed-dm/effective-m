@@ -6,6 +6,8 @@ from menus.sub_menu import sub_menu
 
 
 def sub_menu_decorator(**kwargs):
+    """Provides SUB MENU operation through user interfaces"""
+
     def inner_decorator(func):
         @wraps(func)
         def wrapper():
