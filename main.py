@@ -16,7 +16,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # creates .csv_dir storage when not found on utils.csv_data path
+    # creates .csv storage when not found on csv_dir.csv_data path
     if not os.path.exists(path):
         create()
 
