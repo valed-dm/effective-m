@@ -1,6 +1,6 @@
 """Provides user input simple check, prompt functions"""
 
-from utils.val_phone import val_phone
+from inputs.val_phone import val_phone
 
 
 def input_charfield(field):

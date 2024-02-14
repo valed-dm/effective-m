@@ -1,26 +1,6 @@
 """Provides user input timing and prompt functions"""
 
-import select
-import sys
-
-from .input import input_charfield, input_phonefield
-
-
-def timed_menu(menu: str, delay: int) -> str | None:
-    """Displays menu string for given showtime duration
-    Args:
-        menu: Menu string
-        delay: Menu showtime in seconds
-    """
-    print(menu)
-    print(f"You have {delay} seconds to answer!\nEnter your choice: ")
-
-    a, b, c = select.select([sys.stdin], [], [], delay)
-    if a:
-        return sys.stdin.readline().strip()
-
-    print("Your time expired. Make another attempt.")
-    sys.exit(0)
+from .check_input import input_charfield, input_phonefield
 
 
 def user_input():
@@ -62,39 +42,3 @@ def delete_input():
 
     row = input_charfield("row")
     return row
-
-
-def search_single_row():
-    """Executes search 'one row - multiple columns values match'"""
-
-    search_data = {}
-    print("one row - many columns")
-    while True:
-        print("to exit enter 'stop'")
-        column = input_charfield("column")
-        if column == "stop":
-            break
-        value = input_charfield("value")
-        search_data[column] = value
-    return search_data
-
-
-def search_multiple_rows():
-    """Executes search one column - multiple rows values match"""
-
-    search_data = {}
-    print("one column - many rows")
-    while True:
-        try:
-            list(search_data)[0]
-        except IndexError:
-            column = input_charfield("column")
-            search_data[column] = ()
-        print("to exit enter 'stop'")
-        while True:
-            value = input_charfield("value")
-            if value == "stop":
-                break
-            column = list(search_data)[0]
-            search_data[column] = search_data[column] + (value,)
-        return search_data
