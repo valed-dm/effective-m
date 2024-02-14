@@ -3,10 +3,13 @@
 from actions.crud import read
 from choices.text import START_MENU
 from exit_exception.app_exit import AppExitError
-from .timed_menu import timed_menu
+from interfaces.user_interfaces import (add_row_interface,
+                                        delete_row_interface,
+                                        search_column_interface,
+                                        search_row_interface,
+                                        update_row_interface)
 
-from interfaces.user_interfaces import add_row_interface, update_row_interface, delete_row_interface, \
-    search_row_interface, search_column_interface
+from .timed_menu import timed_menu
 
 
 def main_menu() -> None:
