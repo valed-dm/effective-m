@@ -1,4 +1,4 @@
-"""CRUD for .csv as database"""
+"""CRUD"""
 
 import csv
 from typing import Dict, Tuple

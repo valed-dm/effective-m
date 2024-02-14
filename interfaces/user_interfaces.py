@@ -1,3 +1,5 @@
+"""User interfaces"""
+
 from actions import create, update, delete, row_result, column_result, search_single_row, search_multiple_rows
 from inputs.inputs import user_input, update_input, delete_input
 from menus.sub_menu_decorator import sub_menu_decorator

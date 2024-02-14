@@ -1,4 +1,4 @@
-"""Main phonebook menu executor"""
+"""Main phonebook menu"""
 
 from actions.crud import read
 from choices.text import START_MENU

@@ -1,3 +1,5 @@
+"""Subsequent Menu Decorator"""
+
 from functools import wraps
 
 from menus.sub_menu import sub_menu

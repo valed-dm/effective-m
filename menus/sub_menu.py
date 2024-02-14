@@ -1,3 +1,5 @@
+"""Subsequent menu"""
+
 from typing import Callable
 
 from menus.gtypes import handler_type, data_type
