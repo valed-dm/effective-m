@@ -4,17 +4,9 @@ import csv
 import os
 import unittest
 
-from actions import row_result, column_result
-from actions import create, update, delete
-from csv_dir.csv_data import (
-    fields,
-    fds,
-    updated,
-    company_low,
-    effective_low,
-    val_dict_1,
-    val_dict_2,
-)
+from actions import column_result, create, delete, row_result, update
+from csv_dir.csv_data import (company_low, effective_low, fds, fields, updated,
+                              val_dict_1, val_dict_2)
 
 
 class TestCRUD(unittest.TestCase):
