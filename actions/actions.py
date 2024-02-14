@@ -1,10 +1,11 @@
 """Gets, sorts, requests .csv file as database"""
+
 from typing import Dict, Tuple
 
 import pandas as pd
+from csv_dir.csv_data import path
+from inputs.check_input import input_charfield
 from pandas import DataFrame
-
-from utils.csv_data import path
 
 
 def get_df(p: str = path) -> DataFrame:
@@ -61,3 +62,39 @@ def column_result(val_dict: Dict[str, Tuple[str]], p: str = path) -> DataFrame:
     res = df[mask]
     print(res)
     return res
+
+
+def search_single_row():
+    """Executes search 'one row - multiple columns values match'"""
+
+    search_data = {}
+    print("one row - many columns")
+    while True:
+        print("to exit enter 'stop'")
+        column = input_charfield("column")
+        if column == "stop":
+            break
+        value = input_charfield("value")
+        search_data[column] = value
+    return search_data
+
+
+def search_multiple_rows():
+    """Executes search one column - multiple rows values match"""
+
+    search_data = {}
+    print("one column - many rows")
+    while True:
+        try:
+            list(search_data)[0]
+        except IndexError:
+            column = input_charfield("column")
+            search_data[column] = ()
+        print("to exit enter 'stop'")
+        while True:
+            value = input_charfield("value")
+            if value == "stop":
+                break
+            column = list(search_data)[0]
+            search_data[column] = search_data[column] + (value,)
+        return search_data
