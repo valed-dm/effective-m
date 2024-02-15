@@ -1,4 +1,5 @@
 """User interfaces"""
+from typing import Tuple
 
 from actions import (column_result, create, delete, row_result,
                      search_multiple_rows, search_single_row, update)
@@ -7,8 +8,12 @@ from menus.sub_menu_decorator import sub_menu_decorator
 
 
 @sub_menu_decorator(handler=create, delay=60)
-def add_row_interface():
-    """Guides user through add row task"""
+def add_row_interface() -> Tuple[str, str, str, str, str, str]:
+    """Guides user through add row task
+    Returns:
+        Tuple[str, str, str, str, str, str] -
+        first_name, last_name, middle_name, company, business_phone, cellular_phone
+    """
 
     new_record = new_record_data()
     print("Check your input")
