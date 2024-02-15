@@ -27,10 +27,10 @@ def new_record_data() -> Tuple[str, str, str, str, str, str]:
     return record_data
 
 
-def field_update_input() -> Dict[str, (str, str)]:
+def field_update_input() -> Dict[str, Tuple[str, str]]:
     """Prompts for row number, column name, new value
     Returns:
-        Dict[str, (str, str)] - Dict[row_number, (column_name, new_value)]
+        Dict[row_number, Tuple[column_name, new_value]]
     """
 
     update_data = {}
