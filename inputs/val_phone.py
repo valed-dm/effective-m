@@ -63,6 +63,6 @@ test_phone_numbers = [
 
 
 if __name__ == "__main__":
-    """Tests given regexes examples"""
+    # Tests given regexes examples
     for number in test_phone_numbers:
         print(f"{number}: {val_phone(number)}")
