@@ -18,6 +18,7 @@ def sub_menu_decorator(**kwargs: handler_type | int):
         def wrapper():
             data = func()
             sub_menu(**kwargs, user_interface=func, data=data)
+            # Redirects user to MAIN MENU after requested task finished
             raise StopIteration
 
         return wrapper
