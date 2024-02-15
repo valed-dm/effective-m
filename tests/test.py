@@ -82,7 +82,7 @@ class TestCRUD(unittest.TestCase):
 class TestSearch(unittest.TestCase):
     """Search data testing case"""
 
-    path = "tests/test.csv"
+    path = "test.csv"
     test_data = [fds, updated, company_low, effective_low]
 
     def test_row_search(self):
