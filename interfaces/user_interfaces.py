@@ -1,7 +1,7 @@
 """User interfaces"""
 
 from actions import create, update, delete, row_result, column_result, search_single_row, search_multiple_rows
-from inputs.inputs import user_input, update_input, delete_input
+from inputs.inputs import new_record_data, update_input, delete_input
 from menus.sub_menu_decorator import sub_menu_decorator
 
 
@@ -9,10 +9,10 @@ from menus.sub_menu_decorator import sub_menu_decorator
 def add_row_interface():
     """Guides user through add row task"""
 
-    user_data = user_input()
+    new_record = new_record_data()
     print("Check your input")
-    print(user_data)
-    return user_data
+    print(new_record)
+    return new_record
 
 
 @sub_menu_decorator(handler=update, delay=60)
@@ -33,7 +33,7 @@ def delete_row_interface():
 
 
 @sub_menu_decorator(handler=row_result, delay=60)
-def search_row_interface() -> bool:
+def search_row_interface():
     """Guides user through find single row task"""
 
     val_dict = search_single_row()

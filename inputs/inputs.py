@@ -1,10 +1,14 @@
 """Provides user input timing and prompt functions"""
+from typing import Tuple
 
 from .check_input import input_charfield, input_phonefield
 
 
-def user_input():
-    """Asks for data to create a new record"""
+def new_record_data() -> Tuple[str, str, str, str, str, str]:
+    """Prompts for data to create a new record
+    Returns:
+        Tuple[str, str, str, str, str, str] - new .csv record values
+    """
 
     first_name = input_charfield("first_name")
     last_name = input_charfield("last_name")
@@ -12,7 +16,7 @@ def user_input():
     company = input_charfield("company")
     business_phone = input_phonefield("business_phone")
     cellular_phone = input_phonefield("cellular_phone")
-    user_data = (
+    record_data = (
         first_name,
         last_name,
         middle_name,
@@ -20,7 +24,7 @@ def user_input():
         business_phone,
         cellular_phone,
     )
-    return user_data
+    return record_data
 
 
 def update_input():
