@@ -12,6 +12,8 @@ def get_df(p: str = path) -> DataFrame:
     """Creates dataframe from .csv
     Args:
         p: path to .csv file
+    Returns:
+        DataFrame: df from .csv at given path
     """
 
     data = pd.read_csv(p)
@@ -30,8 +32,10 @@ def sort() -> None:
 def row_result(val_dict: Dict[str, str], p: str = path) -> DataFrame:
     """Executes single row search with multiple columns values
     Args:
-        val_dict: {column_1: value_1, column_2: value_2, ...}
+        val_dict: {column_1: value_1, column_2: value_2, ...} search data dict
         p: path to .csv file
+    Returns:
+        DataFrame: df from .csv at given path with search mask applied
     """
 
     df = get_df(p)
@@ -51,8 +55,10 @@ def row_result(val_dict: Dict[str, str], p: str = path) -> DataFrame:
 def column_result(val_dict: Dict[str, Tuple[str]], p: str = path) -> DataFrame:
     """Executes multiple row search with one or more column's values
     Args:
-        val_dict: {column: (value_1, value_2, value_3 ...)}
+        val_dict: {column: (value_1, value_2, value_3 ...)} search data dict
         p: path to .csv file
+    Returns:
+        DataFrame: df from .csv at given path with search mask applied
     """
 
     df = get_df(p)
@@ -64,8 +70,11 @@ def column_result(val_dict: Dict[str, Tuple[str]], p: str = path) -> DataFrame:
     return res
 
 
-def search_single_row():
-    """Executes search 'one row - multiple columns values match'"""
+def search_single_row() -> Dict[str, str]:
+    """Prompts for search data 'one row - multiple columns'
+    Returns:
+        Dict: {column_1: value_1, column_2: value_2, ...}
+    """
 
     search_data = {}
     print("one row - many columns")
@@ -75,12 +84,16 @@ def search_single_row():
         if column == "stop":
             break
         value = input_charfield("value")
+        # fills search_data with key-values pairs
         search_data[column] = value
     return search_data
 
 
-def search_multiple_rows():
-    """Executes search one column - multiple rows values match"""
+def search_multiple_rows() -> Dict[str, Tuple[str]]:
+    """Prompts for search data 'one column - multiple rows'
+    Returns:
+        Dict: {column: (value_1, value_2, value_3 ...)}
+    """
 
     search_data = {}
     print("one column - many rows")
@@ -88,13 +101,18 @@ def search_multiple_rows():
         try:
             list(search_data)[0]
         except IndexError:
+            # prompts for column name when does not exist
             column = input_charfield("column")
+            # creates new key-value pair in search data Dict
             search_data[column] = ()
         print("to exit enter 'stop'")
         while True:
+            # prompts for an extra column value
             value = input_charfield("value")
             if value == "stop":
                 break
+            # gets related column name
             column = list(search_data)[0]
+            # adds one more value to column values Tuple
             search_data[column] = search_data[column] + (value,)
         return search_data
