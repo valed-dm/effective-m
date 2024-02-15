@@ -1,7 +1,7 @@
 """User interfaces"""
 
 from actions import create, update, delete, row_result, column_result, search_single_row, search_multiple_rows
-from inputs.inputs import new_record_data, update_input, delete_input
+from inputs.inputs import new_record_data, field_update_input, delete_input
 from menus.sub_menu_decorator import sub_menu_decorator
 
 
@@ -19,7 +19,7 @@ def add_row_interface():
 def update_row_interface():
     """Guides user through update row task"""
 
-    update_data = update_input()
+    update_data = field_update_input()
     return update_data
 
 

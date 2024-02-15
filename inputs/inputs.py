@@ -1,5 +1,5 @@
 """Provides user input timing and prompt functions"""
-from typing import Tuple
+from typing import Dict, Tuple
 
 from .check_input import input_charfield, input_phonefield
 
@@ -27,8 +27,11 @@ def new_record_data() -> Tuple[str, str, str, str, str, str]:
     return record_data
 
 
-def update_input():
-    """Prompts and waits for row number, column name, new value to be entered"""
+def field_update_input() -> Dict[str, (str, str)]:
+    """Prompts for row number, column name, new value
+    Returns:
+        Dict[str, (str, str)]
+    """
 
     update_data = {}
     while True:
