@@ -4,7 +4,7 @@ import select
 import sys
 
 
-def timed_menu(menu: str, delay: int) -> str | None:
+def timed_menu(menu: str, delay: int) -> str:
     """Displays menu string for given showtime duration
     Args:
         menu: Menu string
