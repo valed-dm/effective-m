@@ -23,7 +23,7 @@ def create(data: list[str] = fields, p: str = path) -> None:
 
 
 def read() -> None:
-    """Reads .csv by pages.
+    """Reads .csv page by page.
     Page size (rows qty per page shown) = chunksize.
     """
 
@@ -33,6 +33,7 @@ def read() -> None:
         inp = input("for next page press enter; to quit type stop:_")
         if inp == "stop":
             raise StopIteration
+        # csv_data iterator outputs phonebook records by chunksize=50
         df = pd.DataFrame(next(csv_data))
         print(df.to_markdown())
 
