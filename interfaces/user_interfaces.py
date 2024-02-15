@@ -33,8 +33,11 @@ def update_row_interface() -> Dict[str, Tuple[str, str]]:
 
 
 @sub_menu_decorator(handler=delete, delay=60)
-def delete_row_interface():
-    """Guides user through delete row task"""
+def delete_row_interface() -> str:
+    """Guides user through delete row task
+    Returns:
+        str - row number
+    """
 
     print("Enter row to delete or type stop")
     row = row_delete_input()
