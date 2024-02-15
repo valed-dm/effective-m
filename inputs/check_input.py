@@ -3,8 +3,13 @@
 from inputs.val_phone import val_phone
 
 
-def input_charfield(field):
-    """Checks text input"""
+def input_charfield(field: str) -> str:
+    """Simplest text checker for non-empty input
+    Args:
+        field: str
+    Returns:
+        str
+    """
 
     while True:
         res = input(f"enter {field} > ")
@@ -15,8 +20,13 @@ def input_charfield(field):
     return res
 
 
-def input_phonefield(field):
-    """Checks phone number input"""
+def input_phonefield(field: str) -> str:
+    """Just an example of phone number validation
+    Args:
+        field: str
+    Returns:
+        str
+    """
 
     while True:
         res = input_charfield(field)
