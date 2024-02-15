@@ -45,8 +45,11 @@ def delete_row_interface() -> str:
 
 
 @sub_menu_decorator(handler=row_result, delay=60)
-def search_row_interface():
-    """Guides user through find single row task"""
+def search_row_interface() -> Dict[str, str]:
+    """Guides user through search for a single row task
+    Returns:
+        Dict: {column_1: value_1, column_2: value_2, ...} pairs dictionary
+    """
 
     val_dict = search_single_row()
     print("Check your search data")
