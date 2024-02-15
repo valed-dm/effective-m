@@ -1,14 +1,19 @@
 """Subsequent Menu Decorator"""
 
 from functools import wraps
+from typing import Callable
 
+from menus.gtypes import handler_type
 from menus.sub_menu import sub_menu
 
 
-def sub_menu_decorator(**kwargs):
-    """Provides SUB MENU operation through user interfaces"""
+def sub_menu_decorator(**kwargs: handler_type | int):
+    """Provides SUB MENU operation through user interfaces
+    Args:
+        **kwargs: CRUD or SEARCH functions; Menu showtime in seconds.
+    """
 
-    def inner_decorator(func):
+    def inner_decorator(func: Callable[[], None | bool]) -> Callable[[], None | bool]:
         @wraps(func)
         def wrapper():
             data = func()
