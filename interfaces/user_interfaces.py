@@ -59,8 +59,11 @@ def search_row_interface() -> Dict[str, str]:
 
 
 @sub_menu_decorator(handler=column_result, delay=60)
-def search_column_interface():
-    """Guides user through find multiple rows task"""
+def search_column_interface() -> Dict[str, Tuple[str]]:
+    """Guides user through search for multiple rows task
+    Returns:
+        Dict: {column: (value_1, value_2, value_3 ...)}
+    """
 
     val_dict = search_multiple_rows()
     print("Check your search data")
