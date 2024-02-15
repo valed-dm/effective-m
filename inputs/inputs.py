@@ -39,7 +39,6 @@ def field_update_input() -> Dict[str, Tuple[str, str]]:
         column = input_charfield("column")
         new_value = input_charfield("new value")
         update_data[row] = column, new_value
-        print(update_data)
         break
     return update_data
 
