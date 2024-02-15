@@ -1,7 +1,8 @@
 """User interfaces"""
 
-from actions import create, update, delete, row_result, column_result, search_single_row, search_multiple_rows
-from inputs.inputs import new_record_data, field_update_input, delete_input
+from actions import (column_result, create, delete, row_result,
+                     search_multiple_rows, search_single_row, update)
+from inputs.inputs import field_update_input, new_record_data, row_delete_input
 from menus.sub_menu_decorator import sub_menu_decorator
 
 
@@ -28,7 +29,7 @@ def delete_row_interface():
     """Guides user through delete row task"""
 
     print("Enter row to delete or type stop")
-    row = delete_input()
+    row = row_delete_input()
     return row
 
 

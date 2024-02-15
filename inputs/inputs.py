@@ -30,7 +30,7 @@ def new_record_data() -> Tuple[str, str, str, str, str, str]:
 def field_update_input() -> Dict[str, (str, str)]:
     """Prompts for row number, column name, new value
     Returns:
-        Dict[str, (str, str)]
+        Dict[str, (str, str)] - Dict[row_number, (column_name, new_value)]
     """
 
     update_data = {}
@@ -44,8 +44,11 @@ def field_update_input() -> Dict[str, (str, str)]:
     return update_data
 
 
-def delete_input():
-    """Awaits user to enter row number to be deleted"""
+def row_delete_input() -> str:
+    """Prompts for row number to be deleted
+    Returns:
+        str - row number
+    """
 
     row = input_charfield("row")
     return row
