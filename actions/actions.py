@@ -95,7 +95,7 @@ def search_multiple_rows() -> Dict[str, Tuple[str]]:
         Dict: {column: (value_1, value_2, value_3 ...)}
     """
 
-    search_data = {}
+    search_data: Dict[str, Tuple] = {}
     print("one column - many rows")
     while True:
         try:
