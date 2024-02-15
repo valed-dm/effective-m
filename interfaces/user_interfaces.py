@@ -1,5 +1,5 @@
 """User interfaces"""
-from typing import Tuple
+from typing import Dict, Tuple
 
 from actions import (column_result, create, delete, row_result,
                      search_multiple_rows, search_single_row, update)
@@ -16,16 +16,19 @@ def add_row_interface() -> Tuple[str, str, str, str, str, str]:
     """
 
     new_record = new_record_data()
-    print("Check your input")
-    print(new_record)
+    print("Check your new record data\n", new_record)
     return new_record
 
 
 @sub_menu_decorator(handler=update, delay=60)
-def update_row_interface():
-    """Guides user through update row task"""
+def update_row_interface() -> Dict[str, Tuple[str, str]]:
+    """Guides user through update row task
+    Returns:
+        Dict[row_number, Tuple[column_name, new_value]]
+    """
 
     update_data = field_update_input()
+    print("Check update data\n", update_data)
     return update_data
 
 
