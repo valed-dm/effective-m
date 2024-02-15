@@ -1,4 +1,4 @@
-"""Simple phone number validation is used as example. Not specified in specifications."""
+"""Simple phone number validation is used just for example."""
 
 import re
 
@@ -10,8 +10,13 @@ pattern1 = re.compile(
 # pattern2 = re.compile(r"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$")
 
 
-def preprocess_phone_number(phone_number):
-    """Example of number preparation"""
+def preprocess_phone_number(phone_number: str) -> str:
+    """Example of number preparation
+    Args:
+        phone_number: str
+    Returns:
+        str
+    """
 
     # Remove extra spaces
     phone_number = " ".join(phone_number.split())
@@ -20,8 +25,13 @@ def preprocess_phone_number(phone_number):
     return phone_number
 
 
-def val_phone(phone_number):
-    """Example of simple phone validation"""
+def val_phone(phone_number: str) -> bool:
+    """Example of simple phone validation
+    Args:
+        phone_number: str
+    Returns:
+        bool
+    """
 
     phone_number = preprocess_phone_number(phone_number)
     match = re.search(pattern1, phone_number)
@@ -53,5 +63,6 @@ test_phone_numbers = [
 
 
 if __name__ == "__main__":
+    """Tests given regexes examples"""
     for number in test_phone_numbers:
         print(f"{number}: {val_phone(number)}")
