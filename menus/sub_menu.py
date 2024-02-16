@@ -11,7 +11,7 @@ from .timed_menu import timed_menu
 
 def sub_menu(user_interface: Callable[[], None | bool], delay: int, ) -> None | bool:
     """Subsequent menu
-    SUB MENU
+    SUB MENU:
     1 - execute
     2 - repeat entry
     3 - MAIN MENU
