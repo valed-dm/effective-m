@@ -3,6 +3,8 @@
 import select
 import sys
 
+from exit_exception.app_exit import AppExitError
+
 
 def timed_menu(menu: str, delay: int) -> str:
     """Displays menu string for given showtime duration
@@ -17,5 +19,4 @@ def timed_menu(menu: str, delay: int) -> str:
     if a:
         return sys.stdin.readline().strip()
 
-    print("Your time expired. Make another attempt.")
-    sys.exit(0)
+    raise AppExitError("Your time expired. Make another attempt.")
