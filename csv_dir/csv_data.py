@@ -1,7 +1,7 @@
 """Some .csv_dir needed data storage"""
 
 path = "csv_dir/phone_book.csv"
-fields = ["fname", "lname", "mname", "company", "bphone", "cphone"]
+fields = ("fname", "lname", "mname", "company", "bphone", "cphone")
 fds = [
     "Paul",
     "Smith",
