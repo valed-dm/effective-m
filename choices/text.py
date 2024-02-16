@@ -12,7 +12,7 @@ WELCOME TO PHONEBOOK MAIN MENU!
 """
 
 SUB_MENU = """
-SUB MENU
+SUB MENU:
 1 - execute
 2 - repeat entry
 3 - MAIN MENU
