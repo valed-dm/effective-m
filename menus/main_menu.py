@@ -2,6 +2,7 @@
 
 from actions.crud import read
 from choices.text import START_MENU
+from exit_exception.app_errors import terminated_by_user
 from exit_exception.app_exit import AppExitError
 from interfaces.user_interfaces import (add_row_interface,
                                         delete_row_interface,
@@ -37,6 +38,6 @@ def main_menu() -> None:
         "6": search_column_interface,
     }
     if opt == "7":
-        raise AppExitError("phonebook operation is terminated by user")
+        raise AppExitError(terminated_by_user)
 
     options[opt]()

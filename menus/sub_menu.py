@@ -3,6 +3,7 @@
 from typing import Callable
 
 from choices.text import SUB_MENU
+from exit_exception.app_errors import terminated_by_user
 from exit_exception.app_exit import AppExitError
 
 from .timed_menu import timed_menu
@@ -32,6 +33,6 @@ def sub_menu(user_interface: Callable[[], None | bool], delay: int, ) -> None | 
     if opt == "3":
         raise StopIteration
     if opt == "4":
-        raise AppExitError
+        raise AppExitError(terminated_by_user)
 
     return True
