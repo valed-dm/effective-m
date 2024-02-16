@@ -68,7 +68,7 @@ class TestCRUD(unittest.TestCase):
 
         create(p=self.path)
         create(data=fds, p=self.path)
-        delete(row=0, p=self.path)
+        delete(row="0", p=self.path)
         with open(self.path, "rt", encoding="utf-8") as f:
             reader = csv.reader(f)
             _ = next(reader)
