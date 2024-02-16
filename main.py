@@ -31,9 +31,9 @@ if __name__ == "__main__":
             # no search match found;
             # makes user redirected to main menu for a new attempt;
             print("Request returns no data. Try other search.")
-        except AppExitError:
+        except AppExitError as e:
             # executes sys.exit for all menus exit points;
-            print("phonebook operation is terminated by user")
+            print(e)
             sys.exit(0)
         else:
             break
