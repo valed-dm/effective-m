@@ -5,14 +5,15 @@ from typing import Dict, Tuple
 
 import pandas as pd
 from csv_dir.csv_data import fields, path
+from menus.gtypes import row_type
 
 from .actions import get_df, sort
 
 
-def create(data: list[str] = fields, p: str = path) -> None:
+def create(data: row_type = fields, p: str = path) -> None:
     """Creates row in .csv file with CSV File API usage
     Args:
-        data: list of phonebook fields values to be stored in a .csv file row
+        data: tuple of phonebook fields values to be stored in a .csv file row
         p: path to .csv file
     """
 
