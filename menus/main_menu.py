@@ -37,6 +37,6 @@ def main_menu() -> None:
         "6": search_column_interface,
     }
     if opt == "7":
-        raise AppExitError
+        raise AppExitError("phonebook operation is terminated by user")
 
     options[opt]()
