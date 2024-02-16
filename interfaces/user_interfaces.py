@@ -4,11 +4,12 @@ from typing import Dict, Tuple
 from actions import (column_result, create, delete, row_result,
                      search_multiple_rows, search_single_row, update)
 from inputs.inputs import field_update_input, new_record_data, row_delete_input
+from menus.gtypes import row_type
 from menus.sub_menu_decorator import sub_menu_decorator
 
 
 @sub_menu_decorator(handler=create, delay=60)
-def add_row_interface() -> Tuple[str, str, str, str, str, str]:
+def add_row_interface() -> row_type:
     """Guides user through add row task
     Returns:
         Tuple[str, str, str, str, str, str] -
