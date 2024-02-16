@@ -3,5 +3,5 @@
 
 class AppExitError(Exception):
     """Class AppExitError
-    Custom exception to call sys.exit from all menus exit points
+    Custom exception provides exit from main
     """
