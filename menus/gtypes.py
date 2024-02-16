@@ -16,6 +16,6 @@ handler_type = Union[
     Callable[[row_type], None],
     Callable[[str, str], None],
     Callable[[Dict[str, str], str], DataFrame],
-    Callable[[dict[str, tuple[str]], str], DataFrame],
+    Callable[[Dict[str, Tuple[str]], str], DataFrame],
     Callable[[Dict[str, Tuple[str, str]], str], None]
 ]
